@@ -17,6 +17,6 @@ public class HelloAppInitializer implements WebApplicationInitializer{
 		
 		Dynamic servlet = servletContext.addServlet("HelloAppDispatcher", new DispatcherServlet(ctx));
 		servlet.setLoadOnStartup(1);
-		servlet.addMapping("/");
+		servlet.addMapping("/api/v1/*");
 	}
 }

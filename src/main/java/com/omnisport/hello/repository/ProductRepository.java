@@ -9,23 +9,23 @@ import org.springframework.stereotype.Repository;
 import com.omnisport.hello.model.Product;
 
 @Repository
-public class ProductRepository implements CrudRepository{
-
-	public List list() {
+public class ProductRepository implements CrudRepository<Product>{
+	
+	public List<Product> list() {
 		return new ArrayList<Product>();
 	}
 
-	public Optional getById() {
+	public Optional<Product> getById() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object create(Object object) {
+	public Product create(Product object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object update(Object object, int id) {
+	public Product update(Product object, int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -34,5 +34,7 @@ public class ProductRepository implements CrudRepository{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
 
 }

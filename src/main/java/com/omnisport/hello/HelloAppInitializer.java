@@ -18,7 +18,7 @@ public class HelloAppInitializer extends AbstractAnnotationConfigDispatcherServl
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] {"/hello/*"};
+		return new String[] {"/api/v1/*"};
 	}
 
 }

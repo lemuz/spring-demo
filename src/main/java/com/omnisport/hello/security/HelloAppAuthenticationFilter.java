@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.omnisport.hello.model.MyUserDetails;
+import com.omnisport.hello.model.Usuario;
 
 public class HelloAppAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 	
@@ -28,8 +29,8 @@ public class HelloAppAuthenticationFilter extends UsernamePasswordAuthentication
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException{
 		try {
-			Object usuario = new ObjectMapper().readValue(request.getInputStream(), Object.class);
-			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken("username", "password", new ArrayList<>());
+			Usuario usuario = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
+			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(usuario.getUsername(), usuario.getPassword(), new ArrayList<>());
 			Authentication auth = manager.authenticate(token);
 			return auth;
 		}catch(IOException e) {
@@ -41,7 +42,7 @@ public class HelloAppAuthenticationFilter extends UsernamePasswordAuthentication
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication auth) throws IOException {
 		MyUserDetails detalles = (MyUserDetails)auth.getPrincipal();
-		String token = "";//create token
+		String token = detalles.getPassword();//create token not password
 		response.addHeader(Constants.HEADER_AUTHORIZATION_KEY, token);
 	}
 

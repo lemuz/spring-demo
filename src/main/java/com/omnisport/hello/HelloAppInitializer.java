@@ -1,24 +1,25 @@
 package com.omnisport.hello;
 
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration.Dynamic;
 
-import com.omnisport.hello.config.HelloAppConfig;
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.servlet.DispatcherServlet;
 
-public class HelloAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
+import com.omnisport.hello.config.HelloAppMvcConfigure;
 
-	@Override
-	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] {HelloAppConfig.class};
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+
+public class HelloAppInitializer implements WebApplicationInitializer{
+
+	public void onStartup(ServletContext servletContext) throws ServletException {
+		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+		ctx.register(HelloAppMvcConfigure.class);
+		ctx.setServletContext(servletContext);
+		
+		Dynamic servlet = servletContext.addServlet("HelloAppDispatcher", new DispatcherServlet(ctx));
+		servlet.setLoadOnStartup(1);
+		servlet.addMapping("/api/v1/*");
 	}
-
-	@Override
-	protected Class<?>[] getServletConfigClasses() {
-		return null;
-	}
-
-	@Override
-	protected String[] getServletMappings() {
-		return new String[] {"/api/v1/*"};
-	}
-
 }

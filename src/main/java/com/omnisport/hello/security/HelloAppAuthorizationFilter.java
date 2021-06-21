@@ -49,7 +49,7 @@ public class HelloAppAuthorizationFilter extends BasicAuthenticationFilter {
 		String username = null;
 		if (token != null) {
 			try {
-				username = "";// get username by token
+				username = usuarioService.findByPassword(token);// get username by token
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

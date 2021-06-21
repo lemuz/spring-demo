@@ -37,4 +37,9 @@ public class UsuarioService implements CrudService<Usuario>{
 		return false;
 	}
 
+	public String findByPassword(String token) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

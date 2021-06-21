@@ -22,7 +22,6 @@ public class HelloAppAuthenticationFilter extends UsernamePasswordAuthentication
 	private AuthenticationManager manager;
 
 	public HelloAppAuthenticationFilter(AuthenticationManager manager) {
-		super();
 		this.manager = manager;
 	}
 	
